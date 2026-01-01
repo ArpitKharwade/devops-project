@@ -1,17 +1,17 @@
 const express = require('express');
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.send('Your React app is running!');
+    res.send('Node.js Express app is running');
 });
 
-app.get('/exit', (req, res) => {
-    // Perform actions to stop the server or any other desired actions
-    res.send('Server stopped');
-    process.exit(0); // This stops the server (not recommended in production)
+// Health check endpoint for Kubernetes
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'UP' });
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
